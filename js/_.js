@@ -1,3 +1,4 @@
+// 3-1. _each로 _map, _filter 중복 제거
 
 function _filter(list, predi) {
   var new_list = [];

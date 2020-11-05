@@ -250,7 +250,67 @@
 
     // 초기값을 주지않으면 누적값 10, 현재값 10으로 시작된다.
     // acc: 10, cur: 20, idx: 1
+    console.clear();
+     
+    /**
+     * 5. 파이프라인 만들기
+     */
 
+    // 5-1. _pipe: 함수들을 인자로 받아서 함수들을 연속적으로 실행해주는 함수를 리턴
+    function _pipe() {
+      var fns = arguments;
+      return function(arg) {
+        return _reduce(fns, function(arg, fn) {
+          return fn(arg);
+        }, arg)
+      }
+    }
+
+    var f1 = _pipe(
+      function(a) { return a + 1; },
+      function(a) { return a * 2; },
+      function(a) { return a * a; }
+    );
+    console.log( f1(1) );
+
+    // 5-2. _go: 
+    function _go(arg) {
+      var fns = _rest(arguments);
+      _pipe.apply(null, fns)(arg);
+    }
+
+    _go(1,
+      function(a) { return a + 1; },
+      function(a) { return a * 2; },
+      function(a) { return a * a; },
+    console.log);
+
+    // 5-3. users에 -go 적용
+    console.log(
+      _map(
+        _filter(users, function(user) { return user.age >= 30; }),
+        _get('name')
+      )
+    );
+
+    console.log(
+      _map(
+        _filter(users, function(user) { return user.age < 30; }),
+        _get('name')
+      )
+    );
+
+    _go(users,
+      function(users) {
+        return _filter(users, function() {
+          return user.age >= 30;
+        });
+      },
+      function(users) {
+        return _map(users, _get('name'));
+      },
+      console.log
+    )
   </script>
 </body>
 </html>

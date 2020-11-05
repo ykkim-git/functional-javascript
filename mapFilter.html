@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+     * map, filter
+     * 공통점 : 새로운 배열을 만든다.
+     * 차이점 : filter는 조건을 통해 배열안의 값을 삭제 (걸러내기)
+     *         map은 원하는대로 배열안의 값을 변경 (변경하기)
+     */
+
+     // 1보다 큰 값만 뽑아내서 새로운 배열 만들기
+    let arr = [1, 2, 3, 4, -1];
+    // let filterResult = arr.filter(function(num) {
+    //   return num > 1
+    // })
+    
+    // arrow function 사용
+    let filterResult = arr.filter(num => num > 1);
+    console.log(filterResult); // [2, 3, 4]
+
+    // 배열에서 1씩 더해주고싶을 때
+    let mapResult = arr.map(num => num + 1);
+    console.log(mapResult); // [2, 3, 4, 5, 0]
+
+    /**
+     * 필터와 맵 함께 사용
+     * 짝수만 출력하고 key값을 주어서 객체로 만들기
+     */ 
+    console.log(
+      arr.filter(num => num % 2 == 0)
+      .map(num => ({ '짝수' : num })
+    )); // 0: {짝수: 2}
+        //1: {짝수: 4}
+
+  </script>
+</body>
+</html>
